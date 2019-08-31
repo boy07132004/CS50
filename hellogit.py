@@ -1,1 +1,3 @@
-print("Hello,Github")
+print("Type your name:")
+name= input()
+print(f"Hello,{name}")
