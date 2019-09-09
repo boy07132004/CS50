@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    ZM Flight
+{% endblock %}
+
+{% block body %}
+    <h3>Book a flight</h3>
+    
+    <form action="{{ url_for('book') }}" method="post">
+        <div class="form-group">
+            <select class="flight-list" name="flight_id">
+                    {% for flight in flights %}
+                        <option value={{flight.id}}>{{flight.origin}} to {{flight.destination}}</option>
+                    {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <input class="form-group" name="name" placeholder="Input your name to book the flight">
+        </div>
+         
+        <div>
+            <button>Book !</button>
+        </div>
+    </form>
+
+{% endblock %}
