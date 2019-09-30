@@ -1,9 +1,10 @@
 import os
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker,scoped_session
 from models import *
+
 app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
@@ -48,3 +49,25 @@ def flight(flight_id):
     #passengers = Passenger.query.filter(Passenger.flight_id == flight_id)
     passengers = flight.passengers
     return render_template("flight.html",passengers=passengers,flight=flight)
+
+@app.route("/api/flights/<int:flight_id>")
+def flight_api(flight_id):
+    flight = Flight.query.get(flight_id)
+    
+    # Make sure flight exists.
+    if flight is None:
+        return jsonify({"error":"Invalid flight_id"}),422
+    
+    # Get all passengers
+    passengers = flight.passengers
+    name = []
+    for passenger in passengers:
+        name.append(passenger.name)
+    return jsonify({
+        "flight":flight_id,
+        "origin":flight.origin,
+        "destination":flight.destination,
+        "duration":flight.duration,
+        "passenger":name
+    }
+    )
