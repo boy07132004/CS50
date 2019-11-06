@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            //arrow function ()=>{alert('hello world')}
+            document.addEventListener('DOMContentLoaded',()=>{
+                // if use arrow function, 'this.value' can't be allocated for color-change
+                document.querySelector('#color-change').onchange = function(){
+                    document.querySelector('#hello').style.color = this.value;
+                };
+            });
+        </script>
+    </head>
+    <body>
+        <h1 id='hello'>
+            HELLO
+        </h1>
+        <select id ='color-change'>
+            <option value='black'>Black</option>
+            <option value='red'>Red</option>
+            <option value='green'>Green</option>
+            <option value='blue'>Blue</option>
+        </select>
+    </body>
+</html>
