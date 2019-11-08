@@ -2,7 +2,14 @@
 <html>
     <head>
         <script>
-            document.addEventListener('DOMContentLoaded',()=>{
+                document.addEventListener('DOMContentLoaded',()=>{
+                document.querySelector('#submit').disabled = true;
+                document.querySelector('#task_input').onkeyup = ()=>{
+                    if (document.querySelector('#task_input').value.length>0)
+                        document.querySelector('#submit').disabled = false;
+                    else
+                        document.querySelector('#submit').disabled = true;
+                };
                 document.querySelector('#new_task').onsubmit = ()=>{
                     const li = document.createElement('li');
                     li.innerHTML = document.querySelector('#task_input').value;
@@ -10,6 +17,7 @@
                     document.querySelector('#tasks').append(li);
                     // clear input field
                     document.querySelector('#task_input').value = '';
+                    document.querySelector('#submit').disabled = true;
                     // stop form fron submitting or it will go to other website
                     return false;
                 };
@@ -21,8 +29,8 @@
         <ul id='tasks'>
         </ul>
         <form id='new_task'>
-            <input id='task_input' placeholder="New Task" type='text'>
-            <input type='submit'>
+            <input id = 'task_input' placeholder="New Task" type='text'>
+            <input id = 'submit' type='submit'>
         </form>
     </body>
 </html>
