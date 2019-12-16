@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Hi, I'm title</title>
-    </head>
-    <body>
-        <ul>
-            {% for flight in flights%}
-            <li>
-                {{flight}}
-            </li>
-            {% endfor%}
-        </ul>
-    </body>
-</html>
+{% extends 'flights/base.html' %}
+
+{% block title %}
+    Hi , I'm index
+{% endblock %}
+
+{% block body %}
+    <ul>
+        {% for flight in flights %}
+        <li>
+            <a href="{% url 'flight' flight.id %}"> {{flight}} </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
